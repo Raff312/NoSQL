@@ -22,6 +22,9 @@ src,dst,relationship,cost
 "Hoek van Holland","Town6","EROAD",38
 "Hoek van Holland","Town7","EROAD",39
 "Hoek van Holland","Town8","EROAD",43
+"Hoek van Holland","Town9","EROAD",46
+"Hoek van Holland","Town10","EROAD",63
+"Hoek van Holland","Town11","EROAD",93
 "Amsterdam","Town9","EROAD",66
 "Amsterdam","Town1","EROAD",63
 "Amsterdam","Town2","EROAD",64
