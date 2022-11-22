@@ -40,90 +40,31 @@ return
 order by totalCost;
 
 // 2.1
-create
-(svetlana:Person { name: "Svetlana" }),
-(anatoliy:Person { name: "Anatoliy" }),
-(alena:Person { name: "Alena" }),
-(emily:Person { name: "Emily" }),
-(sophie:Person { name: "Sophie" }),
-(james:Person { name: "James" }),
-(michael:Person { name: "Michael" }),
-(emma:Person { name: "Emma" }),
-(isabella:Person { name:"Isabella" }),
-(regina:Person { name: "Regina" }),
-(timofey:Person { name: "Timofey" }),
-(roman:Person { name: "Roman" }),
-(stepan:Person { name: "Stepan" }),
-(galina:Person { name:"Galina" }),
-(oleg:Person { name: "Oleg" }),
-(ivan:Person { name: "Ivan" }),
-(inna:Person { name: "Inna" }),
-(margarita:Person { name: "Margarita" }),
-(maksim:Person { name: "Maksim" }),
-(diana:Person { name: "Diana" }),
+load csv with headers
+from 'https://raw.githubusercontent.com/Raff312/NoSQL/main/lab3/user-nodes.csv' as row
+create (person:Person {
+    id: row.id,
+    name: row.name
+});
 
-(a1:Message { text: "Привет!" }),
-(a2:Message { text: "Пока!" }),
-(a3:Message { text: "Берегитесь!" }),
-(a4:Message { text: "Ничего не бывает" }),
-(a5:Message { text: "Упади красиво" }),
-(a6:Message { text: "Живи и ошибайся" }),
-(a7:Message { text: "Выбрал короткий путь?" }),
-(a8:Message { text: "Мой разум бессилен" }),
-(a9:Message { text:"Все будет правильно" }),
-(a10:Message { text: "Хочу сладкого!" }),
-(a11:Message { text: "Она еще не сдалась" }),
-(a12:Message { text: "Трудности произошли сейчас" }),
-(a13:Message { text: "Человек ценен" }),
-(a14:Message { text: "Не потрать зря" }),
-(a15:Message { text: "Где умирает надежда?" }),
-(a16:Message { text: "Пошел первый снег!" }),
-(a17:Message { text: "Произошла потеря времени" }),
-(a18:Message { text: "У нас все хорошо спланировано" }),
-(a19:Message { text:"В каждом слове есть смысл" }),
-(a20:Message { text: "Всегда есть шанс" }),
+load csv with headers
+from 'https://raw.githubusercontent.com/Raff312/NoSQL/main/lab3/message-nodes.csv' as row
+create (message:Message {
+    id: row.id,
+    text: row.text
+});
 
-(svetlana)-[:FOLLOWS { dist: 300 }]->(anatoliy),
-(svetlana)-[:FOLLOWS { dist: 400 }]->(alena),
-(svetlana)-[:FOLLOWS { dist: 120 }]->(emily),
-(anatoliy)-[:FOLLOWS { dist: 610 }]->(emily),
-(anatoliy)-[:FOLLOWS { dist: 210 }]->(alena),
-(anatoliy)-[:FOLLOWS { dist: 740 }]->(sophie),
-(alena)-[:FOLLOWS { dist: 600 }]->(michael),
-(alena)-[:FOLLOWS { dist: 450 }]->(james),
-(emily)-[:FOLLOWS { dist: 350 }]->(regina),
-(sophie)-[:FOLLOWS { dist: 150 }]->(emma),
-(james)-[:FOLLOWS { dist: 750 }]->(stepan),
-(michael)-[:FOLLOWS { dist: 520 }]->(galina),
-(emma)-[:FOLLOWS { dist: 420 }]->(oleg),
-(isabella)-[:FOLLOWS { dist: 270 }]->(ivan),
-(regina)-[:FOLLOWS { dist: 170 }]->(inna),
-(timofey)-[:FOLLOWS { dist: 290 }]->(margarita),
-(roman)-[:FOLLOWS { dist: 490 }]->(maksim),
-(stepan)-[:FOLLOWS { dist: 360 }]->(inna),
-(galina)-[:FOLLOWS { dist: 760 }]->(roman),
-(oleg)-[:FOLLOWS { dist: 1070 }]->(sophie),
+load csv with headers
+from 'https://raw.githubusercontent.com/Raff312/NoSQL/main/lab3/user-relationships.csv' as row
+match (source:Person { id: row.src })
+match (destination:Person { id: row.dst })
+merge (source) - [:FOLLOWS { distance: toInteger(row.dist) }] -> (destination);
 
-(svetlana)-[:FOLLOWS { dist: 690 }]->(a1),
-(svetlana)-[:FOLLOWS { dist: 690 }]->(a2),
-(anatoliy)-[:FOLLOWS { dist: 450 }]->(a3),
-(alena)-[:FOLLOWS { dist: 880 }]->(a4),
-(emily)-[:FOLLOWS { dist: 880 }]->(a5),
-(sophie)-[:FOLLOWS { dist: 380 }]->(a6),
-(james)-[:FOLLOWS { dist: 480 }]->(a7),
-(michael)-[:FOLLOWS { dist: 580 }]->(a8),
-(michael)-[:FOLLOWS { dist: 580 }]->(a9),
-(emma)-[:FOLLOWS { dist: 1190 }]->(a10),
-(isabella)-[:FOLLOWS { dist: 1700 }]->(a11),
-(regina)-[:FOLLOWS { dist: 430 }]->(a12),
-(timofey)-[:FOLLOWS { dist: 360 }]->(a13),
-(timofey)-[:FOLLOWS { dist: 360 }]->(a14),
-(roman)-[:FOLLOWS { dist: 420 }]->(a15),
-(stepan)-[:FOLLOWS { dist: 1420 }]->(a16),
-(galina)-[:FOLLOWS { dist: 520 }]->(a17),
-(galina)-[:FOLLOWS { dist: 1520 }]->(a18),
-(oleg)-[:FOLLOWS { dist: 1420 }]->(a19),
-(oleg)-[:FOLLOWS { dist: 1720 }]->(a20);
+load csv with headers
+from 'https://raw.githubusercontent.com/Raff312/NoSQL/main/lab3/message-relationships.csv' as row
+match (source:Person { id: row.src })
+match (destination:Message { id: row.dst })
+merge (source) - [:FOLLOWS { distance: toInteger(row.dist) }] -> (destination);
 
 // 2.2
 match (n)
