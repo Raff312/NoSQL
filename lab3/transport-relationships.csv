@@ -14,3 +14,11 @@ src,dst,relationship,cost
 "Gouda","Utrecht","EROAD",35
 "Den Haag","Gouda","EROAD",32
 "Hoek van Holland","Rotterdam","EROAD",33
+"Hoek van Holland","Town1","EROAD",33
+"Hoek van Holland","Town2","EROAD",34
+"Hoek van Holland","Town3","EROAD",35
+"Hoek van Holland","Town4","EROAD",36
+"Hoek van Holland","Town5","EROAD",37
+"Hoek van Holland","Town6","EROAD",38
+"Hoek van Holland","Town7","EROAD",39
+"Hoek van Holland","Town8","EROAD",43
