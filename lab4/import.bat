@@ -1,0 +1,1 @@
+mongoimport --db=Lab4 --collection=labs --type=csv --fields=URL,IP,timeStamp,timeSpent --file=log.csv
